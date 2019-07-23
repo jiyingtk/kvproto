@@ -10750,6 +10750,9 @@ pub struct StoreStats {
     pub bytes_read: u64,
     pub keys_read: u64,
     pub interval: ::protobuf::SingularPtrField<TimeInterval>,
+    pub cpu_usages: u64,
+    pub read_total_ios: u64,
+    pub write_total_ios: u64,
     // special fields
     unknown_fields: ::protobuf::UnknownFields,
     cached_size: ::protobuf::CachedSize,
@@ -11002,6 +11005,51 @@ impl StoreStats {
     pub fn get_interval(&self) -> &TimeInterval {
         self.interval.as_ref().unwrap_or_else(|| TimeInterval::default_instance())
     }
+
+    // uint64 cpu_usages = 16;
+
+    pub fn clear_cpu_usages(&mut self) {
+        self.cpu_usages = 0;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_cpu_usages(&mut self, v: u64) {
+        self.cpu_usages = v;
+    }
+
+    pub fn get_cpu_usages(&self) -> u64 {
+        self.cpu_usages
+    }
+
+    // uint64 read_total_ios = 17;
+
+    pub fn clear_read_total_ios(&mut self) {
+        self.read_total_ios = 0;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_read_total_ios(&mut self, v: u64) {
+        self.read_total_ios = v;
+    }
+
+    pub fn get_read_total_ios(&self) -> u64 {
+        self.read_total_ios
+    }
+
+    // uint64 write_total_ios = 18;
+
+    pub fn clear_write_total_ios(&mut self) {
+        self.write_total_ios = 0;
+    }
+
+    // Param is passed by value, moved
+    pub fn set_write_total_ios(&mut self, v: u64) {
+        self.write_total_ios = v;
+    }
+
+    pub fn get_write_total_ios(&self) -> u64 {
+        self.write_total_ios
+    }
 }
 
 impl ::protobuf::Message for StoreStats {
@@ -11119,6 +11167,27 @@ impl ::protobuf::Message for StoreStats {
                 15 => {
                     ::protobuf::rt::read_singular_message_into(wire_type, is, &mut self.interval)?;
                 },
+                16 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.cpu_usages = tmp;
+                },
+                17 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.read_total_ios = tmp;
+                },
+                18 => {
+                    if wire_type != ::protobuf::wire_format::WireTypeVarint {
+                        return ::std::result::Result::Err(::protobuf::rt::unexpected_wire_type(wire_type));
+                    }
+                    let tmp = is.read_uint64()?;
+                    self.write_total_ios = tmp;
+                },
                 _ => {
                     ::protobuf::rt::read_unknown_or_skip_group(field_number, wire_type, is, self.mut_unknown_fields())?;
                 },
@@ -11177,6 +11246,15 @@ impl ::protobuf::Message for StoreStats {
             let len = v.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint32_size(len) + len;
         }
+        if self.cpu_usages != 0 {
+            my_size += ::protobuf::rt::value_size(16, self.cpu_usages, ::protobuf::wire_format::WireTypeVarint);
+        }
+        if self.read_total_ios != 0 {
+            my_size += ::protobuf::rt::value_size(17, self.read_total_ios, ::protobuf::wire_format::WireTypeVarint);
+        }
+        if self.write_total_ios != 0 {
+            my_size += ::protobuf::rt::value_size(18, self.write_total_ios, ::protobuf::wire_format::WireTypeVarint);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.get_unknown_fields());
         self.cached_size.set(my_size);
         my_size
@@ -11229,6 +11307,15 @@ impl ::protobuf::Message for StoreStats {
             os.write_tag(15, ::protobuf::wire_format::WireTypeLengthDelimited)?;
             os.write_raw_varint32(v.get_cached_size())?;
             v.write_to_with_cached_sizes(os)?;
+        }
+        if self.cpu_usages != 0 {
+            os.write_uint64(16, self.cpu_usages)?;
+        }
+        if self.read_total_ios != 0 {
+            os.write_uint64(17, self.read_total_ios)?;
+        }
+        if self.write_total_ios != 0 {
+            os.write_uint64(18, self.write_total_ios)?;
         }
         os.write_unknown_fields(self.get_unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -11292,6 +11379,9 @@ impl ::protobuf::Clear for StoreStats {
         self.clear_bytes_read();
         self.clear_keys_read();
         self.clear_interval();
+        self.clear_cpu_usages();
+        self.clear_read_total_ios();
+        self.clear_write_total_ios();
         self.unknown_fields.clear();
     }
 }
@@ -11316,6 +11406,9 @@ impl crate::text::PbPrint for StoreStats {
         crate::text::PbPrint::fmt(&self.bytes_read, "bytes_read", buf);
         crate::text::PbPrint::fmt(&self.keys_read, "keys_read", buf);
         crate::text::PbPrint::fmt(&self.interval, "interval", buf);
+        crate::text::PbPrint::fmt(&self.cpu_usages, "cpu_usages", buf);
+        crate::text::PbPrint::fmt(&self.read_total_ios, "read_total_ios", buf);
+        crate::text::PbPrint::fmt(&self.write_total_ios, "write_total_ios", buf);
         if old_len < buf.len() {
           buf.push(' ');
         }
@@ -11341,6 +11434,9 @@ impl ::std::fmt::Debug for StoreStats {
         crate::text::PbPrint::fmt(&self.bytes_read, "bytes_read", &mut s);
         crate::text::PbPrint::fmt(&self.keys_read, "keys_read", &mut s);
         crate::text::PbPrint::fmt(&self.interval, "interval", &mut s);
+        crate::text::PbPrint::fmt(&self.cpu_usages, "cpu_usages", &mut s);
+        crate::text::PbPrint::fmt(&self.read_total_ios, "read_total_ios", &mut s);
+        crate::text::PbPrint::fmt(&self.write_total_ios, "write_total_ios", &mut s);
         write!(f, "{}", s)
     }
 }
