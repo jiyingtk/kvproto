@@ -440,6 +440,12 @@ message StoreStats {
     uint64 keys_read = 14;
     // Actually reported time interval
     TimeInterval interval = 15;
+    // Total CPU usages in the store
+    uint64 cpu_usages = 16;
+    // Total disk I/Os of read in the store
+    uint64 read_total_ios = 17;
+    // Total disk I/Os of write in the store
+    uint64 write_total_ios = 18;
 }
 
 message StoreHeartbeatRequest {
