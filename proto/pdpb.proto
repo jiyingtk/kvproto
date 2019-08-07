@@ -440,6 +440,14 @@ message StoreStats {
     uint64 keys_read = 14;
     // Actually reported time interval
     TimeInterval interval = 15;
+    // Threads' CPU usages in the store
+    map<string, uint64> cpu_usages = 16;
+    // Threads' read disk I/O rates in the store
+    map<string, uint64> read_io_rates = 17;
+    // Threads' write disk I/O rates in the store
+    map<string, uint64> write_io_rates = 18;
+    // Operations' latencies in the store
+    map<string, uint64> op_latencies = 19;
 }
 
 message StoreHeartbeatRequest {
