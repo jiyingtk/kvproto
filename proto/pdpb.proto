@@ -308,6 +308,10 @@ message RegionHeartbeatRequest {
     // Term is the term of raft group.
     uint64 term = 14;
     replication_modepb.RegionReplicationStatus replication_status = 15;
+    uint64 ops = 16;
+    uint64 bytes = 17;
+    uint64 ops_w = 18;
+    uint64 bytes_w = 19;
 }
 
 message ChangePeer {
@@ -472,6 +476,10 @@ message StoreStats {
     repeated RecordPair write_io_rates = 18;
     // Operations' latencies in the store
     repeated RecordPair op_latencies = 19;
+    uint64 ops = 20;
+    uint64 bytes = 21;
+    uint64 ops_w = 22;
+    uint64 bytes_w = 23;
 }
 
 message StoreHeartbeatRequest {
