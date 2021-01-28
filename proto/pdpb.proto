@@ -501,10 +501,10 @@ message StoreStats {
     repeated RecordPair write_io_rates = 18;
     // Operations' latencies in the store
     repeated RecordPair op_latencies = 19;
-    uint64 ops = 20;
-    uint64 bytes = 21;
-    uint64 ops_w = 22;
-    uint64 bytes_w = 23;
+    uint64 ops_read = 20;
+    uint64 ops_write = 21;
+    uint64 leader_bytes_written = 22;
+    uint64 leader_keys_written = 23;
 }
 
 message StoreHeartbeatRequest {
